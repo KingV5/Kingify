@@ -46,7 +46,7 @@ local playersService = cloneref(game:GetService('Players'))
 local function downloadFile(path, func)
     if not isfile(path) then
         local suc, res = pcall(function()
-            return game:HttpGet('https://raw.githubusercontent.com/poopparty/poopparty/' .. readfile('newvape/profiles/commit.txt') .. '/' .. select(1, path:gsub('newvape/', '')), true)
+         return game:HttpGet('https://raw.githubusercontent.com/KingV5/Kingify/' .. readfile('kingify/profiles/commit.txt') .. '/' .. select(1, path:gsub('kingify/', '')), true)
         end)
         if not suc or res == '404: Not Found' then error(res) end
         if path:find('.lua') then
