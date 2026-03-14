@@ -6385,7 +6385,7 @@ run(function()
         Name = 'Attack range',
         Min = 1,
         Max = 40,
-        Default = 14, 
+        Default = 20, 
         Suffix = function(val)
             return val == 1 and 'stud' or 'studs'
         end
