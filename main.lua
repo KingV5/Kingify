@@ -154,7 +154,7 @@ if not shared.VapeIndependent then
     else
         if not shared.VapeDeveloper then
             local suc, res = pcall(function()
-                return game:HttpGet('https://raw.githubusercontent.com/poopparty/poopparty/' .. readfile('newvape/profiles/commit.txt') .. '/games/' .. game.PlaceId .. '.lua', true)
+              return game:HttpGet('https://raw.githubusercontent.com/KingV5/Kingify/' .. readfile('kingify/profiles/commit.txt') .. '/games/' .. game.PlaceId .. '.lua', true)
             end)
             if suc and res ~= '404: Not Found' then
                 loadstring(downloadFile('newvape/games/' .. game.PlaceId .. '.lua'), tostring(game.PlaceId))(...)
