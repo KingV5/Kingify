@@ -2291,7 +2291,7 @@ run(function()
 	local hasReacted = false
 	local currentTarget = nil
 	
-	local aerov4bad = {
+	local Kingify = {
 		predictStrafingMovement = function(targetPlayer, targetPart, projSpeed, gravity, origin)
 			if not targetPlayer or not targetPlayer.Character or not targetPart then 
 				return targetPart and targetPart.Position or Vector3.zero
@@ -2421,7 +2421,7 @@ run(function()
 		local targetBodyPart = getTargetPart(ent)
 		if not targetBodyPart then return nil end
 		
-		if PAMode.Value == 'Aero' then
+		if PAMode.Value == 'Kingify' then
 			local projSpeed = 100
 			local gravity = 196.2
 			
@@ -2449,7 +2449,7 @@ run(function()
 				end
 			end
 			
-			local predictedPos = aerov4bad.predictStrafingMovement(
+			local predictedPos = Kingify.predictStrafingMovement(
 				ent.Player,
 				targetBodyPart,
 				projSpeed,
@@ -2698,9 +2698,9 @@ run(function()
 	
 	PAMode = ProjectileAimAssist:CreateDropdown({
 		Name = 'Prediction Mode',
-		List = {'Vape', 'Aero'},
-		Default = 'Aero',
-		Tooltip = 'Vape = Built-in | Aero = Custom'
+		List = {'Vape', 'Kingify'},
+		Default = 'Kingify',
+		Tooltip = 'Vape = Built-in | Kingify = Custom'
 	})
 	
 	AimSpeed = ProjectileAimAssist:CreateSlider({
@@ -3092,7 +3092,7 @@ run(function()
             end)
         end
 
-        local function AutoClickAero()
+        local function AutoClickKingify()
             if Thread then task.cancel(Thread) end
             Thread = task_spawn(function()
                 local toolCheckCounter = 0
@@ -3139,7 +3139,7 @@ run(function()
             if ACMode.Value == 'Vape' then
                 AutoClickVape()
             else
-                AutoClickAero()
+                AutoClickKingify()
             end
         end
 
@@ -3179,23 +3179,23 @@ run(function()
         end
 
         local function updateModeVisibility()
-            local isAero = ACMode.Value == 'Aero'
-            if SwingSwordToggle and SwingSwordToggle.Object then SwingSwordToggle.Object.Visible = isAero end
-            if SwordCPS and SwordCPS.Object then SwordCPS.Object.Visible = isAero end
-            if ShootProjectilesToggle and ShootProjectilesToggle.Object then ShootProjectilesToggle.Object.Visible = isAero end
-            if ProjectileCPS and ProjectileCPS.Object then ProjectileCPS.Object.Visible = isAero end
-            if KeybindToggle and KeybindToggle.Object then KeybindToggle.Object.Visible = isAero end
-            if KeybindMode and KeybindMode.Object then KeybindMode.Object.Visible = isAero and KeybindEnabled end
-            if KeybindList and KeybindList.Object then KeybindList.Object.Visible = isAero and KeybindEnabled and not UseMouseBind end
-            if MouseBindToggle and MouseBindToggle.Object then MouseBindToggle.Object.Visible = isAero and KeybindEnabled end
-            if MouseBindList and MouseBindList.Object then MouseBindList.Object.Visible = isAero and KeybindEnabled and UseMouseBind end
+            local isKingify = ACMode.Value == 'Kingify'
+            if SwingSwordToggle and SwingSwordToggle.Object then SwingSwordToggle.Object.Visible = isKingify end
+            if SwordCPS and SwordCPS.Object then SwordCPS.Object.Visible = isKingify end
+            if ShootProjectilesToggle and ShootProjectilesToggle.Object then ShootProjectilesToggle.Object.Visible = isKingify end
+            if ProjectileCPS and ProjectileCPS.Object then ProjectileCPS.Object.Visible = isKingify end
+            if KeybindToggle and KeybindToggle.Object then KeybindToggle.Object.Visible = isKingify end
+            if KeybindMode and KeybindMode.Object then KeybindMode.Object.Visible = isKingify and KeybindEnabled end
+            if KeybindList and KeybindList.Object then KeybindList.Object.Visible = isKingify and KeybindEnabled and not UseMouseBind end
+            if MouseBindToggle and MouseBindToggle.Object then MouseBindToggle.Object.Visible = isKingify and KeybindEnabled end
+            if MouseBindList and MouseBindList.Object then MouseBindList.Object.Visible = isKingify and KeybindEnabled and UseMouseBind end
         end
 
         AutoClicker = vape.Categories.Combat:CreateModule({
             Name = 'AutoClicker',
             Function = function(callback)
                 if callback then
-                    if KeybindEnabled and ACMode.Value == 'Aero' then
+                    if KeybindEnabled and ACMode.Value == 'Kingify' then
                         AutoClicker:Clean(inputService.InputBegan:Connect(function(input)
                             if UseMouseBind then
                                 if input.UserInputType == CurrentMouseBind then
@@ -3259,7 +3259,7 @@ run(function()
 
         ACMode = AutoClicker:CreateDropdown({
             Name = 'AC Mode',
-            List = {'Vape', 'Aero'},
+            List = {'Vape', 'Kingify'},
             Default = 'Vape',
             Function = function(val)
                 StopAutoClick()
@@ -3555,7 +3555,7 @@ run(function()
 
     local function createkitrender(plr)
         local icon = Instance.new("ImageLabel")
-        icon.Name = "AeroV4KitRender" 
+        icon.Name = "KingifyV4KitRender" 
         icon.AnchorPoint = Vector2.new(1, 0.5)
         icon.BackgroundTransparency = 1
         icon.Position = UDim2.new(1.05, 0, 0.5, 0)
@@ -3584,7 +3584,7 @@ run(function()
         end
         
         for _, v in ipairs(PlayerGui:GetDescendants()) do
-            if v:IsA("ImageLabel") and v.Name == "AeroV4KitRender" then  
+            if v:IsA("ImageLabel") and v.Name == "KingifyV4KitRender" then  
                 v:Destroy()
             end
         end
@@ -3638,7 +3638,7 @@ run(function()
             local card = container:FindFirstChild("1") and container["1"]:FindFirstChild("MatchDraftPlayerCard")
             if not card then return end
             
-            local icon = card:FindFirstChild("AeroV4KitRender")  
+            local icon = card:FindFirstChild("KingifyV4KitRender")  
             if not icon then
                 icon = createkitrender(playerFound)
                 icon.Parent = card
@@ -3740,7 +3740,7 @@ run(function()
                     end
                     
                     local kitLabel = Instance.new("ImageLabel")
-                    kitLabel.Name = "AeroV4KitIcon"
+                    kitLabel.Name = "KingifyV4KitIcon"
                     kitLabel.Size = UDim2.new(1, 0, 1, 0)
                     kitLabel.Position = UDim2.new(1.1, 0, 0, 0)
                     kitLabel.BackgroundTransparency = 1
@@ -5578,7 +5578,7 @@ run(function()
 	})
 end)
 
--- aero killaura 
+-- Kingify killaura 
 local Attacking
 run(function()
     local Killaura
@@ -7933,7 +7933,7 @@ run(function()
 	local DesirePACursorShowGUI
 	local DesirePAWorkMode
 	local SortMethod
-	local AeroPAChargePercent
+	local KingifyPAChargePercent
 	local RandomHeadPercent
 	local RandomTorsoPercent
 	local CustomPrediction          
@@ -7954,7 +7954,7 @@ run(function()
 	local lockedRandomPart = nil
 	local wasHovering = false
 
-	local aerov4bad = {
+	local Kingify = {
 		predictStrafingMovement = function(targetPlayer, targetPart, projSpeed, gravity, origin)
 			if not targetPlayer or not targetPlayer.Character or not targetPart then
 				return targetPart and targetPart.Position or Vector3.zero
@@ -8061,7 +8061,7 @@ run(function()
 		return closestPot
 	end
 
-	local function getAeroPATarget(originPos)
+	local function getKingifyPATarget(originPos)
 		local validTargets = {}
 		local rangeSquared = Range.Value * Range.Value
 		local fovThreshold = math_cos(math_rad(FOV.Value) / 2)
@@ -8215,8 +8215,8 @@ run(function()
 		if DesirePACursorLimitBow then DesirePACursorLimitBow.Object.Visible = (mode == 'DesirePA') end
 		if DesirePACursorShowGUI then DesirePACursorShowGUI.Object.Visible = (mode == 'DesirePA') end
 		if DesirePAWorkMode then DesirePAWorkMode.Object.Visible = (mode == 'DesirePA') end
-		if SortMethod then SortMethod.Object.Visible = (mode == 'AeroPA') end
-		if AeroPAChargePercent then AeroPAChargePercent.Object.Visible = (mode == 'AeroPA') end
+		if SortMethod then SortMethod.Object.Visible = (mode == 'KingifyPA') end
+		if KingifyPAChargePercent then KingifyPAChargePercent.Object.Visible = (mode == 'KingifyPA') end
 		if RandomHeadPercent then RandomHeadPercent.Object.Visible = isRandom end
 		if RandomTorsoPercent then RandomTorsoPercent.Object.Visible = isRandom end
 		if CustomPrediction then
@@ -8263,7 +8263,7 @@ run(function()
 					if selectedTarget and selectedTarget.Character and selectedTarget.Character.PrimaryPart then
 						local dist = (selectedTarget.Character.PrimaryPart.Position - originPos).Magnitude
 						if dist <= Range.Value then
-							if PAMode.Value == 'AeroPA' and AeroPATargetPriority.Value == 'Forest' and not HasSeed(selectedTarget.Character) then
+							if PAMode.Value == 'KingifyPA' and KingifyPATargetPriority.Value == 'Forest' and not HasSeed(selectedTarget.Character) then
 								selectedTarget = nil
 								updateOutline(nil)
 							else
@@ -8276,8 +8276,8 @@ run(function()
 					end
 
 					if not plr then
-						if PAMode.Value == 'AeroPA' and SortMethod.Value ~= 'Distance' then
-							plr = getAeroPATarget(originPos)
+						if PAMode.Value == 'KingifyPA' and SortMethod.Value ~= 'Distance' then
+							plr = getKingifyPATarget(originPos)
 						else
 							local entityPart = (TargetPart.Value == 'Closest' or TargetPart.Value == 'Randomize') and 'RootPart' or TargetPart.Value
 							plr = entitylib.EntityMouse({
@@ -8453,15 +8453,15 @@ run(function()
 								}
 							end
 
-						elseif PAMode.Value == 'AeroPA' then
+						elseif PAMode.Value == 'KingifyPA' then
 							local distance = (targetBodyPart.Position - offsetpos).Magnitude
 							local rawLook = CFrame.new(offsetpos, targetBodyPart.Position)
 							local tempPart = {
 								Position = targetBodyPart.Position,
 								Velocity = targetVelocity
 							}
-							local predictedPosition = aerov4bad.predictStrafingMovement(plr.Player, tempPart, projSpeed, gravity, offsetpos)
-							local newlook = aerov4bad.smoothAim(rawLook, predictedPosition, distance)
+							local predictedPosition = Kingify.predictStrafingMovement(plr.Player, tempPart, projSpeed, gravity, offsetpos)
+							local newlook = Kingify.smoothAim(rawLook, predictedPosition, distance)
 							if projmeta.projectile ~= 'owl_projectile' then
 								newlook = newlook * CFrame.new(bedwars.BowConstantsTable.RelX or 0, bedwars.BowConstantsTable.RelY or 0, bedwars.BowConstantsTable.RelZ or 0)
 							end
@@ -8472,9 +8472,9 @@ run(function()
 							)
 							if calc then
 								if targetinfo and targetinfo.Targets then targetinfo.Targets[plr] = tick() + 1 end
-								local customDrawDuration = 0.58 * (AeroPAChargePercent.Value / 100)
+								local customDrawDuration = 0.58 * (KingifyPAChargePercent.Value / 100)
 								if usingFrostStaff then
-									customDrawDuration = getFrostStaffCooldown(store.hand.tool.Name) * (AeroPAChargePercent.Value / 100)
+									customDrawDuration = getFrostStaffCooldown(store.hand.tool.Name) * (KingifyPAChargePercent.Value / 100)
 								end
 								local finalDirection = (calc - newlook.p).Unit
 								local angleFromHorizontal = math.acos(math.clamp(finalDirection:Dot(Vector3.new(0, 1, 0)), -1, 1))
@@ -8545,7 +8545,7 @@ run(function()
 
 	PAMode = ProjectileAimbot:CreateDropdown({
 		Name = 'PA Mode',
-		List = {'Vape', 'AeroPA', 'DesirePA', 'SavyPA'},
+		List = {'Vape', 'KingifyPA', 'Kingify', 'Kingify'},
 		Default = 'Vape',
 		Tooltip = 'Select prediction algorithm',
 		Function = function() updateOptionsVisibility() end
@@ -8696,7 +8696,7 @@ run(function()
         Tooltip = 'prioritize targets'
     })
 
-	AeroPAChargePercent = ProjectileAimbot:CreateSlider({
+	KingifyPAChargePercent = ProjectileAimbot:CreateSlider({
 		Name = 'Charge Percent',
 		Min = 1,
 		Max = 100,
@@ -9314,7 +9314,7 @@ run(function()
         return false
     end
     
-    local Aerov4TitanRemover = vape.Categories.BoostFPS:CreateModule({
+    local Kingifyv4TitanRemover = vape.Categories.BoostFPS:CreateModule({
         Name = 'Titan Remover',
         Function = function(callback)
             if callback then
@@ -9504,12 +9504,12 @@ run(function()
         Tooltip = 'Removes Titan/Bhaa models and effects for FPS boost'
     })
 
-    EffectsOnly = Aerov4TitanRemover:CreateToggle({
+    EffectsOnly = Kingifyv4TitanRemover:CreateToggle({
         Name = 'Effects Only',
         Default = false,
         Tooltip = 'Only hides particles keeps titan models visible',
         Function = function(callback)
-            if Aerov4TitanRemover.Enabled then
+            if Kingifyv4TitanRemover.Enabled then
                 for object, properties in pairs(originalProperties) do
                     if object and object.Parent then
                         pcall(function()
@@ -9524,9 +9524,9 @@ run(function()
                 processedObjects = {}
                 originalProperties = {}
                 
-                Aerov4TitanRemover:Toggle()
+                Kingifyv4TitanRemover:Toggle()
                 task.wait()
-                Aerov4TitanRemover:Toggle()
+                Kingifyv4TitanRemover:Toggle()
             end
         end
     })
