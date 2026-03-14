@@ -92,7 +92,7 @@ local function finishLoading()
             local success, err = pcall(queue_on_teleport, teleportScript)
             if not success then
                 shared.vapereload = true
-                warn('[AEROV4] queue_on_teleport failed u may need to reinject manually after teleport')
+                warn('[Kingify] queue_on_teleport failed u may need to reinject manually after teleport')
             end
         end
     end))
@@ -101,7 +101,7 @@ local function finishLoading()
         if not vape.Categories then return end
         if vape.Categories.Main.Options['GUI bind indicator'].Enabled then
             local name = shared.ValidatedUsername and ('wsg, ' .. shared.ValidatedUsername .. ' :D ') or 'welcome '
-            vape:CreateNotification('[AEROV4] Finished Loading', name .. (vape.VapeButton and 'Press the button in the top right to open GUI' or 'Press ' .. table.concat(vape.Keybind, ' + '):upper() .. ' to open GUI'), 5)
+            vape:CreateNotification('[Kingify] Finished Loading', name .. (vape.VapeButton and 'Press the button in the top right to open GUI' or 'Press ' .. table.concat(vape.Keybind, ' + '):upper() .. ' to open GUI'), 5)
         end
     end
 end
@@ -117,11 +117,11 @@ end
 
 local guiFunc, guiErr = loadstring(downloadFile('newvape/guis/' .. gui .. '.lua'), 'gui')
 if not guiFunc then
-    error('[AEROV4] Failed to load GUI: ' .. tostring(guiErr))
+    error('[Kingify] Failed to load GUI: ' .. tostring(guiErr))
 end
 vape = guiFunc()
 if not vape then
-    error('[AEROV4] GUI returned nil file may be corrupted try deleting newvape/guis/' .. gui .. '.lua and reinjecting.')
+    error('[Kingify] GUI returned nil file may be corrupted try deleting newvape/guis/' .. gui .. '.lua and reinjecting.')
 end
 shared.vape = vape
 task.wait(0.1)
