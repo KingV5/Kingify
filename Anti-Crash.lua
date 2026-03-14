@@ -49,7 +49,7 @@ local state = {
     lastRespawn = 0,
     lastPlayerCheckTime = tick(),
     connections = {}, -- Track connections for cleanup
-    currentFPS = 60,
+    currentFPS = 1000,
     averagePing = 0,
     performanceScore = 100,
 }
